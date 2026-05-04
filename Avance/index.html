@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turismo Extremo Sur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Barra de Navegación -->
+    <nav>
+        <ul>
+            <li><a href="somos.html">¿Quiénes somos?</a></li>
+            <li><a href="#nuestros-servicios">Nuestros servicios</a></li>
+            <li><a href="contacto/contacto.html">Contáctanos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección ¿Quiénes somos? -->
+    <section>
+       
+    </section>
+
+    <!-- Sección Nuestros Servicios -->
+    <section id="nuestros-servicios">
+        <h1>Nuestros Servicios</h1>
+        <div id="contenedor-servicios" class="servicios-grid">
+            <!-- Los servicios se cargarán dinámicamente aquí -->
+        </div>
+        
+        <h2>Ubicación</h2>
+        <div class="mapa">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d84950.55627581729!2d-70.988224!3d-53.162544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb2638368863f67%3A0x6b77242137688!2sPunta%20Arenas%2C%20Magallanes%20y%20la%20Ant%C3%A1rtica%20Chilena!5e0!3m2!1ses!2scl!4v1700000000000" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- Sección Contáctanos -->
+    <section id="contactanos">
+        <h1>Contáctanos</h1>
+        <form id="form-contacto">
+            <input type="text" id="nombre" placeholder="Nombre completo">
+            <input type="text" id="celular" placeholder="Celular (solo números)">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="pais" placeholder="País">
+            <input type="text" id="ciudad" placeholder="Ciudad">
+            <textarea id="consulta" placeholder="Escribe tu consulta"></textarea>
+            
+            <button type="button" onclick="validarFormulario()">Enviar</button>
+        </form>
+        <p id="mensaje-exito" style="display: none; color: green; font-weight: bold;">
+            ¡Datos enviados con éxito!
+        </p>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
