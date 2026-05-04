@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a2540 0%, #184e6f 100%);
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .form-container {
+            width: min(100%, 560px);
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.16);
+            padding: 36px;
+        }
+
+        .form-container h2 {
+            margin: 0 0 24px;
+            font-size: 2rem;
+            letter-spacing: -0.04em;
+            color: #0f172a;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .form-field label {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .form-field input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 1rem;
+            color: #0f172a;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-field input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .form-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .submit-button {
+            border: none;
+            border-radius: 14px;
+            background: #2563eb;
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 14px 18px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        #Mensaje {
+            min-height: 1.2rem;
+            font-size: 0.98rem;
+        }
+
+        .message-error {
+            color: #b91c1c;
+        }
+
+        .message-success {
+            color: #047857;
+        }
+    </style>
+ </head>
+  <body>
+    <div class="form-container">
+      <h2>Formulario de Registro</h2>
+      <form id="formulario" novalidate>
+        <div class="form-field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ingrese su nombre completo" autocomplete="name" required>
+        </div>
+
+        <div class="form-field">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" placeholder="Ingrese su correo electrónico" autocomplete="email" required>
+        </div>
+
+        <div class="form-field">
+          <label for="rut">RUT</label>
+          <input type="text" id="rut" placeholder="12345678-9" autocomplete="off" required>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-button">Enviar datos</button>
+          <p id="Mensaje" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const $form = $('#formulario');
+            const $nombre = $('#nombre');
+            const $correo = $('#correo');
+            const $rut = $('#rut');
+            const $mensaje = $('#Mensaje');
+
+            const mostrarMensaje = (texto, tipo) => {
+                $mensaje
+                    .text(texto)
+                    .removeClass('message-error message-success')
+                    .addClass(tipo === 'error' ? 'message-error' : 'message-success');
+            };
+
+            const esNombreValido = nombre => {
+                const valor = nombre.trim();
+                return valor.length >= 2 && /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(valor);
+            };
+
+            const esCorreoValido = correo => {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.trim());
+            };
+
+            const validarRUT = rut => {
+                const limpio = rut.replace(/\./g, '').replace(/-/g, '').toUpperCase().trim();
+                if (!/^\d{7,8}[0-9K]$/.test(limpio)) {
+                    return false;
+                }
+
+                const cuerpo = limpio.slice(0, -1);
+                const dv = limpio.slice(-1);
+                let suma = 0;
+                let multiplicador = 2;
+
+                for (let i = cuerpo.length - 1; i >= 0; i--) {
+                    suma += parseInt(cuerpo.charAt(i), 10) * multiplicador;
+                    multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+                }
+
+                const resultado = 11 - (suma % 11);
+                const dvEsperado = resultado === 11 ? '0' : resultado === 10 ? 'K' : String(resultado);
+                return dvEsperado === dv;
+            };
+
+            $form.on('submit', function(event) {
+                event.preventDefault();
+
+                const nombre = $nombre.val();
+                const correo = $correo.val();
+                const rut = $rut.val();
+
+                if (!nombre || !correo || !rut) {
+                    mostrarMensaje('Por favor, complete todos los campos.', 'error');
+                    return;
+                }
+
+                if (!esNombreValido(nombre)) {
+                    mostrarMensaje('Ingrese un nombre válido sin números ni símbolos.', 'error');
+                    return;
+                }
+
+                if (!esCorreoValido(correo)) {
+                    mostrarMensaje('Ingrese un correo electrónico válido.', 'error');
+                    return;
+                }
+
+                if (!validarRUT(rut)) {
+                    mostrarMensaje('Ingrese un RUT válido.', 'error');
+                    return;
+                }
+
+                mostrarMensaje('Formulario enviado correctamente.', 'success');
+                // Aquí puedes enviar los datos al servidor usando AJAX
+            });
+        });
+    </script>
+</body>
+</html>

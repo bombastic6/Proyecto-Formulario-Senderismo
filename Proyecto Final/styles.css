@@ -1,0 +1,198 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #556B2F, #B0C4DE);
+    background-attachment: fixed;
+    color: #333;
+}
+
+nav {
+    background-color: #4B5320; 
+    padding: 10px;
+}
+
+nav ul {
+    display: flex;          
+    list-style: none;       
+    margin: 0;
+    padding: 0;
+    justify-content: center; 
+    gap: 70px;             
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none; 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+nav ul li a:hover {
+    color: #8FBC8F; 
+}
+
+img{
+    width: 300px;
+    height: 300px;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.integrantes{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.integrante {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: #333; 
+}
+
+.integrante img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.somos h1{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.somos .descripcion {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+#nuestros-servicios h1 {
+    color: white;
+    text-align: center;
+}
+
+.mapa-container h2 {
+    color: white;
+    text-align: center;
+}
+
+.mapa-container iframe {
+    max-width: 800px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.servicio-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.servicio-card img {
+    width: 100%;
+    max-width: 300px;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: stretch;    
+    justify-content: flex-start; 
+    
+    width: min(100%, 560px);
+    background: rgba(255, 255, 255, 0.9); 
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.16);
+    padding: 36px;
+    margin: auto; 
+}
+
+.form-container h2 {
+    margin: 0 0 24px;
+    font-size: 2rem;
+    letter-spacing: -0.04em;
+    color: #0f172a;
+    text-align: center; 
+}
+
+.form-field {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.form-field label {
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    font-size: 1rem;
+    color: #0f172a;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+.form-field input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.submit-button {
+    border: none;
+    border-radius: 14px;
+    background: #778899; 
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 14px 18px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #696969; 
+    transform: translateY(-1px);
+}
+
+#Mensaje {
+    min-height: 1.2rem;
+    font-size: 0.98rem;
+}
